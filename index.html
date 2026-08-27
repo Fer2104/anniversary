@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aniversario de Bodas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ecdcb4;
+    --paper-shadow:#d8c191;
+    --paper-edge:#b89b66;
+    --ink:#4a3418;
+    --ink-deep:#2e2012;
+    --wax:#7a2323;
+    --wax-light:#9c3a3a;
+    --gold:#a9822f;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(ellipse at 50% 0%, #2c2013 0%, transparent 60%),
+      linear-gradient(160deg, #241a10, #130d07);
+    font-family:'EB Garamond', serif;
+    padding:56px 16px 40px;
+  }
+
+  .wrap{
+    position:relative;
+    width:100%;
+    max-width:460px;
+  }
+
+  /* Sello de cera */
+  .seal{
+    position:absolute;
+    top:-30px;
+    left:50%;
+    transform:translateX(-50%) rotate(-4deg);
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, var(--wax-light), var(--wax) 65%, #5c1919 100%);
+    box-shadow:0 4px 8px rgba(0,0,0,0.45), inset 0 -3px 5px rgba(0,0,0,0.35), inset 0 2px 3px rgba(255,255,255,0.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:3;
+  }
+  .seal span{
+    font-family:'Cinzel', serif;
+    font-weight:600;
+    font-size:22px;
+    color:#e9c9a0;
+    text-shadow:0 1px 1px rgba(0,0,0,0.5);
+  }
+
+  /* La hoja de pergamino */
+  .parchment{
+    position:relative;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(184,155,102,0.35), transparent 45%),
+      radial-gradient(ellipse at 85% 75%, rgba(184,155,102,0.3), transparent 50%),
+      radial-gradient(ellipse at 60% 40%, rgba(255,248,225,0.25), transparent 55%),
+      linear-gradient(160deg, var(--paper), var(--paper-shadow));
+    box-shadow:0 18px 40px rgba(0,0,0,0.5), inset 0 0 60px rgba(120,95,50,0.25), inset 0 0 2px rgba(0,0,0,0.2);
+    padding:54px 38px 42px;
+    transform:rotate(-0.6deg);
+    color:var(--ink);
+  }
+
+  /* Bordes irregulares tipo "rasgado" */
+  .parchment::before, .parchment::after{
+    content:"";
+    position:absolute;
+    left:-1px;
+    right:-1px;
+    height:13px;
+    background-image:
+      linear-gradient(135deg, var(--paper) 50%, transparent 50%),
+      linear-gradient(45deg, var(--paper) 50%, transparent 50%);
+    background-size:17px 17px;
+    background-position:0 100%, 8.5px 100%;
+    background-repeat:repeat-x;
+  }
+  .parchment::before{ top:-12px; }
+  .parchment::after{ bottom:-12px; transform:rotate(180deg); }
+
+  .eyebrow{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    font-size:12px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:6px 0 28px;
+  }
+
+  /* Foto tipo fotografía antigua */
+  .photo-frame{
+    width:128px;
+    margin:0 auto 30px;
+    background:#fbf6ea;
+    padding:8px 8px 22px;
+    box-shadow:0 6px 14px rgba(0,0,0,0.3);
+    transform:rotate(2deg);
+  }
+  .photo-frame img{
+    width:100%;
+    height:128px;
+    object-fit:cover;
+    display:block;
+    filter:sepia(0.15);
+  }
+  .photo-placeholder{
+    width:100%;
+    height:128px;
+    border:1px dashed var(--paper-edge);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    letter-spacing:0.08em;
+    color:var(--ink);
+    opacity:0.55;
+    text-align:center;
+    padding:10px;
+  }
+
+  .names{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:8px;
+  }
+  .names .name{
+    font-size:27px;
+    font-weight:500;
+    color:var(--ink-deep);
+  }
+  .amp{
+    font-family:'Mrs Saint Delafield', cursive;
+    font-size:34px;
+    color:var(--wax);
+    line-height:1;
+  }
+
+  .flourish{
+    text-align:center;
+    color:var(--gold);
+    font-size:15px;
+    letter-spacing:0.4em;
+    margin:0 0 28px;
+    opacity:0.8;
+  }
+
+  .message{
+    font-size:18px;
+    line-height:1.75;
+    text-align:left;
+    max-height:50vh;
+    overflow-y:auto;
+    margin:0 0 30px;
+    padding:2px 14px 2px 2px;
+    scrollbar-width:thin;
+    scrollbar-color:var(--paper-edge) transparent;
+  }
+  .message p{ margin:0 0 17px; }
+  .message p:last-child{ margin-bottom:0; }
+  .message p:first-of-type::first-letter{
+    font-family:'Mrs Saint Delafield', cursive;
+    font-size:2.6em;
+    color:var(--wax);
+    float:left;
+    line-height:0.75;
+    padding-right:7px;
+  }
+  .message::-webkit-scrollbar{ width:5px; }
+  .message::-webkit-scrollbar-thumb{ background:var(--paper-edge); border-radius:4px; }
+  .message::-webkit-scrollbar-track{ background:transparent; }
+
+  .signature{
+    text-align:center;
+    font-family:'Mrs Saint Delafield', cursive;
+    font-size:26px;
+    color:var(--ink-deep);
+  }
+  .date{
+    text-align:center;
+    margin-top:8px;
+    font-family:'Cinzel', serif;
+    font-size:10px;
+    letter-spacing:0.12em;
+    color:var(--ink);
+    opacity:0.55;
+  }
+
+  @media (max-width:380px){
+    .parchment{ padding:48px 24px 36px; }
+    .names .name{ font-size:22px; }
+    .message{ font-size:16.5px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="seal"><span>&amp;</span></div>
+
+    <div class="parchment">
+      <div class="eyebrow">Aniversario de Bodas</div>
+
+      <!-- ===== FOTO =====
+           Para poner tu foto: reemplaza el src de abajo por la ruta de tu imagen
+           y borra el <div class="photo-placeholder">...</div>
+           Ejemplo: <img src="nuestra-foto.jpg" alt="Nosotros">
+      -->
+      <div class="photo-frame">
+        <img src="" alt="Foto de la pareja" style="display:none;">
+        <div class="photo-placeholder">TU FOTO<br>AQUÍ</div>
+      </div>
+
+      <div class="names">
+        <span class="name">Fernando</span>
+        <span class="amp">&amp;</span>
+        <span class="name">Legny</span>
+      </div>
+
+      <div class="flourish">❧</div>
+
+      <!-- ===== MENSAJE ===== -->
+      <div class="message">
+        <p>Si algún día despiertas y ya no recuerdas mi voz o mi nombre, no importa; con que recuerdes que alguien te miró como si fueras un milagro, como si el mundo comenzara y terminara en ti, con eso me doy por servido.</p>
+        <p>Y si te preguntas qué pasaría si yo también te olvido, porque así es la vida, te respondería que eso no sería posible, porque hay personas que uno no recuerda con la memoria, sino con todo lo que uno llegó a ser después de haberlas conocido. Y tú, de alguna manera, ya eres parte de quien soy. Tendría que perder una parte de mí, y no pienso andar por la vida en pedazos.</p>
+        <p>Además, seré el testimonio de que fuimos, y eso basta; de que nos tuvimos, y eso es certeza. Y que, en el gran libro de la vida, tú y yo fuimos lo correcto, aunque no fuéramos lo eterno.</p>
+        <p>Y eso, ni siquiera el olvido podrá borrarlo.</p>
+        <p>Porque el tiempo pasa, sí… pero mi amor por ti ha aprendido a caminar con calma, sin premura. No se rompe fácilmente; simplemente permanece, incluso cuando todo cambia.</p>
+        <p>Hoy no solo conmemoro un aniversario. De alguna manera, celebro la decisión diaria de elegirnos; de quedarnos cuando tal vez sería más fácil soltarnos; de seguir construyendo algo que no siempre es perfecto, pero que sí es verdadero.</p>
+        <p>Porque amar, con los años, no es sentir más; es comprender mejor. Es mirar al otro y reconocer que, después de todo —lo bueno, pero también lo malo—, sigue siendo tu lugar favorito. Y solo anhelar que la vida nos siga regalando risas sin razón y más días en los que todo valga la pena simplemente por estar juntos.</p>
+        <p>Yo creo que el amor también se demuestra con las heridas que uno está dispuesto a soportar. Porque amar no siempre es fácil. Es quedarse con paciencia cuando todo invita a rendirse, cuando el orgullo grita más fuerte que el corazón.</p>
+        <p>Pero si algo he aprendido contigo es que el amor no se extingue cuando la persona se aleja; a veces solo se esconde donde más duele. Y ahí estás tú, en ese rincón donde termina el orgullo y comienza la nostalgia.</p>
+        <p>Es ahí cuando comprendes que la verdadera boda está en los días difíciles, cuando tenemos que elegirnos otra vez. Está en las mañanas cotidianas y comunes, en esas pequeñas cosas que nos desafían a no olvidar por qué nos elegimos.</p>
+        <p>Sin embargo, también debo ser realista, aunque me parta el alma.</p>
+        <p>A veces el amor no es suficiente si no existe la voluntad. A veces siento que estoy persiguiendo a alguien que no quiere ser alcanzado. Siento que eriges una barrera cargada de soberbia que me resulta imposible atravesar. Y es desgarrador lo rápido que aprendí a buscarte y lo lento que mi corazón acepta que, quizás, tú ya no me estás buscando a mí.</p>
+        <p>Porque amar también es soltar. Por eso, como un acto de amor, no te voy a pedir que te quedes ni que me permitas quedarme. Voy a darte la libertad de que, desde lo más profundo de tu corazón, me elijas otra vez; o de que me permitas entender que mi presencia ya no te hace feliz y que quizá me he convertido en una carga.</p>
+        <p>No quiero que estés conmigo por costumbre o por cualquier otra forma de presión. Quiero que estés conmigo porque quieres estar. Quiero que puedas sentirte libre y en paz.</p>
+        <p>Y si decides que tu camino ya no es conmigo, espero que no recuerdes nuestro final. Recuerda todo lo bonito, recuerda las risas, los días buenos, las veces que nos elegimos, las pequeñas cosas que hicieron que valiera la pena. Porque incluso si algún día tengo que soltarte, seguiré amándote tanto como para desearte felicidad, aunque esa felicidad ya no sea a mi lado.</p>
+        <p>A Dios, le agradezco haberte encontrado, por los años que nos ha permitido compartir y por cada día, incluso aquellos que no entendimos. Y si todavía hay un camino que podamos recorrer juntos, le pediré que nos dé la sabiduría para reconocerlo, la humildad para perdonarnos y la voluntad para volver a elegirnos.</p>
+      </div>
+
+      <div class="signature">Con todo mi amor</div>
+      <div class="signature">Fernando Muñoz Toro</div>
+      <div class="date">27 de Agosto, 2026</div>
+    </div>
+  </div>
+
+</body>
+</html>
